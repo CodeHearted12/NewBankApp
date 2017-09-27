@@ -6,11 +6,11 @@ class App extends Component {
   render() {
     return (
         <div className="main">
-          <div className= "jumbotron">
-            <h1 className= "display-3">BankShot</h1>
-            <p className= "lead">Your world wide banking leader.</p>
+          <div className= "Mega">
+            <h1 className= "display-3">BudgetBanking</h1>
+            <p className= "lead">Banking on a Budget</p>
             <hr className= "my-4"/>
-            <p>Quick, fast, and sometimes accurate account results.</p>
+            <p>We take balling on a budget serious.</p>
             <p className= "lead">
               <Link className= "btn btn-primary btn-lg" to="/users" role="button">Check Users</Link>
             </p>

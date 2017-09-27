@@ -8,7 +8,7 @@ class accountInfo extends Component {
   render() {
     if (!this.props.account) {
       return <div>
-                Please select a account...
+                Please choose your account...
              </div>;
     }
 
@@ -16,7 +16,7 @@ class accountInfo extends Component {
       <div className="col-md-6">
         <div className="card">
           <div className="card-block">
-            <h4 className="card-title">Account Information</h4>
+            <h4 className="card-title">Your Account Information</h4>
             <h6 className="card-subtitle mb-2 text-muted">
               {this.props.user.name}
             </h6>

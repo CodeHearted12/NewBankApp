@@ -30,7 +30,7 @@ class Transactions extends React.component {
           className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Make a withdrawal</ModalHeader>
           <ModalBody>
-            Pick an amount you&apos;d like to withdraw from your account. Current
+            Please select an amount you would like to withdraw from your account. Current
             balance is: {this.props.account.balance}
           </ModalBody>
           <ModalFooter>
