@@ -10,15 +10,16 @@ export function selectUser(userId) {
 }
 
 export function selectAccount(accountId) {
-  return {
+  return{
     type: ACCOUNT_SELECTED,
     payload: accountId
   };
+
 }
 
 export function withdrawFunds(amount) {
   return {
     type: WITHDRAW_FUNDS,
     payload: parseInt(amount, 10)
-  };
+  }
 }

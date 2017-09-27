@@ -1,7 +1,10 @@
+//React imports
 import React, {Component} from 'react';
+//Redux imports
 import {connect} from 'react-redux';
 import {selectUser} from '../actions/index.js'
 import { bindActionCreators } from 'redux';
+//react router imports
 import { Link } from 'react-router-dom';
 
 class listing extends Component {
@@ -15,7 +18,8 @@ class listing extends Component {
         });
         return (
             <div>
-              <h5>Users with current accounts:</h5>
+              <h5>Users with open accounts:</h5>
+              <hr></hr>
               <ul>
                 {users}
               </ul>
@@ -34,4 +38,4 @@ function mapDispatchToProps(dispatch) {
     }, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(listing)
+export default connect(mapStateToProps, mapDispatchToProps)(listing);

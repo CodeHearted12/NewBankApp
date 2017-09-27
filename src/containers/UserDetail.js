@@ -7,7 +7,8 @@ import { Link } from "react-router-dom";
 class UserDetail extends Component {
   render() {
     if (!this.props.user) {
-      return <div>Please select a user...</div>;
+      return( <div>Please select a user...</div>
+        )
     }
     const { id } = this.props.match.params;
     let accounts = this.props.user.accounts.map(account => {
@@ -54,7 +55,7 @@ class UserDetail extends Component {
 
 function mapStateToProps(state) {
   return {
-    user: state.selectedUser,
+    user: state.accountType,
     account: state.selectedAccount
   };
 }
