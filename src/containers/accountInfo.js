@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
-import Transaction from './Transactions';
+import Transactions from './Transactions';
 
 class accountInfo extends Component {
-  state = {  }
+  //state = {  }
   render() {
     if(!this.props.account) {
       return (
@@ -13,6 +13,7 @@ class accountInfo extends Component {
       )
     }
     return (
+
       <div className="col-md-6">
         <div className= "card">
           <div className= "card-block">
@@ -22,24 +23,25 @@ class accountInfo extends Component {
             <div className= "card-text">
               <div>{this.props.account.balance}</div>
             </div>
-            <Transaction/>
+            <Transactions/>
             <Link className="btn btn-primary" to="/users" >Back to List of Users</Link>
           </div>
         </div>
       </div>
-    );
+      );
   }
 }
 
 function mapStateToProps(state) {
+  const userId = state.users.findIndex(user => user._id === state.selectedUser);
+  const accountId = state.users[userId].accounts.findIndex(account => account.id === state.selectedAccount);
   return {
-    user: state.selectedUser,
-    account: state.selectedAccount
+    account: state.users[userId].accounts[accountId],
+  user: state.users[userId]
   };
 }
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-
-  }, dispatch)
+  return bindActionCreators({}, dispatch);
 }
-export default connect(mapStateToProps,  mapDispatchToProps)(accountInfo);
+
+export default connect(mapStateToProps) (accountInfo);
