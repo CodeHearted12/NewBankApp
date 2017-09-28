@@ -1,10 +1,8 @@
-//React imports
+
 import React, {Component} from 'react';
-//Redux imports
 import {connect} from 'react-redux';
 import {selectUser} from '../actions/index.js'
 import { bindActionCreators } from 'redux';
-//react router imports
 import { Link } from 'react-router-dom';
 
 class listing extends Component {

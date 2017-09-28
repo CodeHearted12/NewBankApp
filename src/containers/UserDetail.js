@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { selectUser, selectAccount } from "../actions/index";
+import { selectAccount } from "../actions/index";
 import { bindActionCreators } from "redux";
 import { Link } from "react-router-dom";
 
 class UserDetail extends Component {
   render() {
     if (!this.props.user) {
-      return( <div>Please select a user...</div>
-        )
+      return (<div>Please select a user...</div>
+      )
     }
     const { id } = this.props.match.params;
     let accounts = this.props.user.accounts.map(account => {
@@ -16,7 +16,7 @@ class UserDetail extends Component {
       return (
         <div key={account.id}>
           <Link
-            onClick={() => this.props.selectAccount(account)}
+            onClick={() => this.props.selectAccount(account.id)}
             to={`/users/${id}/${account.id}`}>
             {account.accountType}
           </Link>
@@ -54,20 +54,21 @@ class UserDetail extends Component {
 }
 
 function mapStateToProps(state) {
+  const userId = state.users.findIndex(user => user._id === state.selectedUser);
   return {
-    user: state.accountType,
-    account: state.selectedAccount
+     user: state.users[userId]
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(
-    {
-      selectAccount: selectAccount,
-      selectedUser: selectUser
-    },
-    dispatch
-  );
-}
+
+      function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    selectAccount: selectAccount,
+
+  },
+  dispatch
+);
+ }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserDetail);

@@ -1,4 +1,4 @@
-import React, { Components } from 'react';
+import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import Button from 'muicss/lib/react/button';
 
