@@ -1,11 +1,12 @@
-import React from 'react';
-import { Button,Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withdrawFunds } from '../actions/index.js'
 import { bindActionCreators } from 'redux';
+import { withdrawFunds } from '../actions/index';
 
-class Transactions extends React.Component {
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+
+
+class Transactions extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,10 +15,20 @@ class Transactions extends React.Component {
 
     this.toggle = this.toggle.bind(this);
   }
+
   toggle() {
     this.setState({
       modal: !this.state.modal
     });
+  }
+
+  handleWithdraw = (e) => {
+    let amount = e.target.value;
+    console.log(amount);
+    if (amount) {
+      this.props.withdrawFunds(amount)
+    }
+    this.toggle();
   }
 
   render() {
@@ -27,13 +38,13 @@ class Transactions extends React.Component {
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Make a Withdrawal</ModalHeader>
           <ModalBody>
-            Please pick an amount to withdraw from your credit account. Your current balance is: {this.props.account.balance}
+            Please pick an amount to withdraw from your {this.props.account.accountType} account. Your current balance is: $ {this.props.account.balance}
           </ModalBody>
           <ModalFooter>
-            <Button  color="primary" onClick={e => {this.toggle(); return this.props.withdrawFunds(5)}}>$5</Button>{' '}
-            <Button  color="success" onClick={e => {this.toggle(); return this.props.withdrawFunds(10)}}>$10</Button>{' '}
-            <Button  color="info" onClick={e => {this.toggle(); return this.props.withdrawFunds(20)}}>$20</Button>{' '}
-            <Button color="danger" onClick={this.toggle}>Cancel</Button>
+            <Button color="primary" value={5.00} onClick={this.handleWithdraw}>$5</Button>{' '}
+            <Button color="success" value={10.00} onClick={this.handleWithdraw}>$10</Button>{' '}
+            <Button color="info" value={20.00} onClick={this.handleWithdraw}>$20</Button>{' '}
+            <Button color="danger" onClick={this.handleWithdraw}>Cancel</Button>
           </ModalFooter>
         </Modal>
       </div>
@@ -42,14 +53,19 @@ class Transactions extends React.Component {
 }
 
 function mapStateToProps(state) {
+  const userIdx = state.users.findIndex(user => user._id === state.selectedUser);
+  const accountIdx = state.users[userIdx].accounts.findIndex(account => account.id === state.selectedAccount);
   return {
-    user: state.selectedUser,
-    account: state.selectedAccount
+    account: state.users[userIdx].accounts[accountIdx],
+    user: state.users[userIdx]
   };
 }
+
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    withdrawFunds: withdrawFunds
-  }, dispatch)
+    return bindActionCreators({
+        withdrawFunds: withdrawFunds
+    }, dispatch)
 }
+
+
 export default connect(mapStateToProps,  mapDispatchToProps)(Transactions);

@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 class UserDetail extends Component {
   render() {
     if (!this.props.user) {
-      return (<div>Please select a user...</div>
+      return (<div> Select User...</div>
       )
     }
     const { id } = this.props.match.params;
@@ -43,15 +43,13 @@ class UserDetail extends Component {
               </div>
             </div>
             {accounts}
+            </div>
+            <Link className="btn btn-primary" to="/users" >Return to List of Users</Link>
           </div>
-          <Link className="btn btn-primary" to="/users">
-            Back to List of Users
-          </Link>
         </div>
-      </div>
-    );
+      );
+    }
   }
-}
 
 function mapStateToProps(state) {
   const userId = state.users.findIndex(user => user._id === state.selectedUser);
@@ -66,8 +64,8 @@ function mapStateToProps(state) {
     selectAccount: selectAccount,
 
   },
-  dispatch
-);
+    dispatch
+    );
  }
 
 
